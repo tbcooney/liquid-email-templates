@@ -1,0 +1,58 @@
+<%= form_with(model: [:admin, @facility, :settings, email_template], id: "edit_facility_email_template") do |f| %>
+  <div class="mt-6 md:flex md:items-start md:justify-between md:space-x-12">
+    <div class="flex-grow space-y-4">
+      <%= f.hidden_field :name, value: email_template.name %>
+      <% if @email_template.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@email_template.errors.count, "error") %> prohibited this product from being saved:</h2>
+
+          <ul>
+          <% @email_template.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :title do %>
+          Email subject
+        <% end %>
+        <%= f.text_field :title,
+          class: "form-input"
+        %>
+      </div>
+      <div class="field">
+        <%= f.label :body_html do %>
+          Email body (HTML)
+        <% end %>
+        <%= f.text_area :body_html,
+          placeholder: true,
+          class: "form-input h-screen",
+          value: body
+        %>
+      </div>
+    </div>
+
+    <div class="flex-1 panel">
+      <div class="panel-header bg-white">
+        <h5 class="text-lg font-bold">Liquid variables</h5>
+      </div>
+      <div class="p-4 space-y-4">
+        <p class="type--half-margin">
+          You can use liquid variables to output an accent colour and logo image in your templates. The available variables are:
+        </p>
+        <ul class="list-disc px-4">
+          <li><code>{{facility.email_logo_url}}</code></li>
+          <li><code>{{facility.email_logo_width}}</code></li>
+          <li><code>{{facility.email_accent_color}}</code></li>
+        </ul>
+        <div>
+          <%= link_to admin_facility_settings_email_settings_path(@facility), class: "btn btn-secondary font-bold" do %>
+            Customize
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

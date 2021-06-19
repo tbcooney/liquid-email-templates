@@ -1,0 +1,23 @@
+<div class="bg-white relative px-6 py-4">
+  <div class="md:flex md:items-center md:justify-between">
+    <div class="flex-1 min-w-0">
+      <nav>
+        <%= link_to admin_facility_settings_facility_email_templates_path, class: "btn btn-link text-sm" do %>
+          Back to email templates
+        <% end %>
+      </nav>
+      <h2 class="font-serif text-4xl leading-7 sm:text-5xl sm:leading-tight sm:truncate">
+        <%= @email_template.name %>
+      </h2>
+    </div>
+  </div>
+</div>
+<section class="bg-white">
+  <div class="mx-auto py-12 px-4 sm:px-6 lg:pt-16 pb-12">
+    <div>
+      <%= render partial: "admin/facilities/settings/email_templates/form", locals: { email_template: @email_template, body: @email_template.body_html } %>
+    </div>
+  </div>
+</section>
+
+
